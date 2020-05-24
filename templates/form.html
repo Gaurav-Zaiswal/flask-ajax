@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Fetching JSON in AJAX</title>
+</head>
+<body>
+    <header style="text-align: center;">
+        <h1>Form submition and fetching data using AJAX</h1>
+    </header>
+    <main style="display: flex; justify-content: space-around; padding: 1em;">
+        <!-- left-part-form  -->
+        <div id="left" class="form-input" style="border: 1px black solid;">
+            <h3>Please, fill the form</h3>
+            <lagend>All fields are conpulsory</lagend>
+            <form action="" method="POST">    
+                <input name="name" type="text" class="name" placeholder="Full name"> <br>
+                <input name="roll" type="number" class="roll" placeholder="Roll number"> <br>
+                <input name="faculty" type="text" class="faculty" placeholder="faculty"><br>
+                <button type="submit" value="submit">Send</button>
+            </form>
+        </div>
+        <!-- right-part-form-content  -->
+        <div id="right" class="form-output" style="border: 1px black solid; padding: 1em;">
+            <h3>Confirm sumission</h3>
+            <ul class="add-here"></ul>
+        </div>
+    </main> 
+    <script src="{{ url_for('static', filename='main.js') }}"></script>  
+
+</body>
+</html>
