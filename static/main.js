@@ -1,9 +1,15 @@
-const btn = document.getElementsByTagName("button");
+const btn = document.querySelector("#submit-btn");
+const form1 = document.querySelector("#any-form");
 const ulFld = document.querySelector(".add-here");
+const uName = document.querySelector(".name");
+const uRoll = document.querySelector(".roll");
+const uFaculty = document.querySelector(".faculty");
 
-btn[0].addEventListener('click', callAjax);
+
+form1.addEventListener('submit', callAjax);
 
 function callAjax(event) {
+
     event.preventDefault();
     // initializing an object for XMLHttpRequest
     const xrh = new XMLHttpRequest();
@@ -12,15 +18,7 @@ function callAjax(event) {
     xrh.onload = function () {
         // console.log(response);
         if (this.status === 200) {
-            let list = JSON.parse(this.responseText);
-            let listItem = document.createElement("li");
-                var item = '';
-                item += `Name: ${list.name}<br/>`
-                    + `Roll: ${list.roll}<br/>`
-                    + `Faculty: ${list.faculty}<br/>`;
-
-                listItem.innerHTML = item;
-                ulFld.appendChild(listItem);
+            ulFld.innerHTML = "Submission successful using AJAX";
         } else {
             console.error();
             alert('some error occured!');
@@ -28,8 +26,19 @@ function callAjax(event) {
     }
 
     // to initialize request
-    xrh.open('POST', '/', true);
+    xrh.open('POST', '/response', true);
+    
+    // to send POST request
+    xrh.setRequestHeader("Content-type", "application/json");
+    
+    var data = JSON.stringify({
+        'name': uName.value,
+        'roll': uRoll.value,
+        'faculty': uFaculty.value
+    });
+
+console.log(data);
 
     // sending request
-    xrh.send();
+    xrh.send(data);
 }

@@ -5,14 +5,26 @@ from flask import Flask, render_template, request, jsonify, url_for
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
-def hello_world():
-    if request.method == 'POST':
-        req = request.form
-        print(req)
-        return jsonify(req)
-        # return jsonify(user)
+@app.route('/')
+def hello_world():    
     return render_template('form.html')
+
+@app.route('/response', methods=["POST"])
+def process(): 
+    print(request.form)
+    name = request.form.get("name")
+    roll = request.form.get("roll")
+    faculty = request.form.get("faculty")
+    print({
+        'name': name,
+        'roll': roll,
+        'faculty': faculty
+    })
+    return jsonify({
+        'name': name,
+        'roll': roll,
+        'faculty': faculty
+    })   
 
 
 if __name__ == "__main__":
